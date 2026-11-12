@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>جزوهٔ روابط بازگشتی — مبانی ترکیبیات</title>
+
+<!-- فونت فارسی -->
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" />
+
+<!-- MathJax برای فرمول‌ها -->
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+    svg: { fontCache: 'global' },
+    options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+<style>
+  :root{
+    --bg:#f7f8fb;
+    --paper:#ffffff;
+    --ink:#1f2430;
+    --muted:#5a6274;
+    --line:#e3e6ee;
+    --accent:#2b5cff;
+    --accent-soft:#eaf0ff;
+    --note:#fff7e6;
+    --note-border:#f0b429;
+    --ok:#0f9d58;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);
+    font-family:"Vazirmatn","IRANSans",Tahoma,system-ui,sans-serif;
+    line-height:1.95;font-size:16px}
+  .toolbar{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);
+    backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    display:flex;gap:10px;justify-content:space-between;align-items:center;
+    padding:10px 18px}
+  .toolbar .title{font-weight:700;color:var(--accent)}
+  .btn{border:1px solid var(--accent);color:#fff;background:var(--accent);
+    padding:8px 16px;border-radius:10px;cursor:pointer;font-family:inherit;
+    font-size:14px;transition:.2s}
+  .btn:hover{filter:brightness(1.08)}
+  .btn.ghost{background:#fff;color:var(--accent)}
+  .wrap{max-width:920px;margin:22px auto 60px;padding:0 16px}
+  .paper{background:var(--paper);border:1px solid var(--line);border-radius:16px;
+    padding:34px 36px;box-shadow:0 6px 24px rgba(20,30,60,.06)}
+  h1{font-size:1.85rem;margin:0 0 6px;color:var(--accent)}
+  .subtitle{color:var(--muted);font-size:.95rem;margin-bottom:22px}
+  h2{font-size:1.28rem;margin:34px 0 12px;padding-bottom:8px;
+    border-bottom:2px solid var(--accent-soft);color:#16204a}
+  h3{font-size:1.05rem;margin:22px 0 8px;color:#26305c}
+  p{margin:8px 0}
+  ul,ol{margin:8px 0 8px 0;padding-right:22px}
+  li{margin:4px 0}
+  code{background:#f1f3f8;padding:2px 6px;border-radius:6px;
+    font-family:ui-monospace,Consolas,monospace;font-size:.9em;direction:ltr;unicode-bidi:embed}
+  .formula{background:#fafbff;border:1px solid var(--line);border-radius:10px;
+    padding:10px 14px;margin:10px 0;overflow-x:auto}
+  .note{background:var(--note);border-right:4px solid var(--note-border);
+    padding:12px 16px;border-radius:10px;margin:14px 0;font-size:.95rem}
+  .note b{color:#8a5a00}
+  .ok{background:#eafaf0;border-right:4px solid var(--ok);
+    padding:10px 14px;border-radius:10px;margin:12px 0}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.95rem}
+  th,td{border:1px solid var(--line);padding:9px 12px;text-align:right}
+  th{background:var(--accent-soft);color:#16204a}
+  tr:nth-child(even) td{background:#fafbff}
+  .toc{background:#f4f6ff;border:1px solid var(--line);border-radius:12px;
+    padding:14px 20px;margin:18px 0}
+  .toc ol{margin:6px 0;padding-right:22px}
+  .toc a{color:var(--accent);text-decoration:none}
+  .toc a:hover{text-decoration:underline}
+  .pagebreak{page-break-after:always}
+  .kbd{display:inline-block;background:#eef1f8;border:1px solid #d9deea;
+    border-bottom-width:2px;border-radius:6px;padding:0 8px;font-size:.85em}
+  .footer{margin-top:36px;padding-top:16px;border-top:1px dashed var(--line);
+    text-align:center;color:var(--muted);font-size:.85rem}
+
+  @media print{
+    body{background:#fff}
+    .toolbar{display:none}
+    .wrap{margin:0;max-width:100%;padding:0}
+    .paper{border:none;box-shadow:none;border-radius:0;padding:0}
+    h2{page-break-after:avoid}
+    .formula, table, .note{page-break-inside:avoid}
+    a{color:inherit;text-decoration:none}
+    @page{size:A4;margin:18mm 16mm}
+  }
+  @media(max-width:640px){
+    .paper{padding:20px}
+    h1{font-size:1.4rem}
+    h2{font-size:1.1rem}
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="title">جزوهٔ روابط بازگشتی</div>
+  <div>
+    <button class="btn ghost" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ بالا</button>
+    <button class="btn" onclick="window.print()">🖨 چاپ / PDF</button>
+  </div>
+</div>
+
+<div class="wrap">
+<div class="paper">
+
+  <h1>روابط بازگشتی</h1>
+  <div class="subtitle">مبانی ترکیبیات — بر اساس اسلایدهای فاطمه بهاری‌فرد | نسخهٔ بازنویسی و تکمیل‌شده</div>
+
+  <div class="toc">
+    <b>فهرست مطالب</b>
+    <ol>
+      <li><a href="#s0">اصلاحات مهم فرمولی</a></li>
+      <li><a href="#s1">تعریف رابطهٔ بازگشتی</a></li>
+      <li><a href="#s2">مثال‌های پایه</a></li>
+      <li><a href="#s3">برج هانوی با حرکت فقط ساعتگرد</a></li>
+      <li><a href="#s4">مسائل فرش کردن و رشته‌های باینری</a></li>
+      <li><a href="#s5">روش‌های مقدماتی حل</a></li>
+      <li><a href="#s6">حل روابط همگن خطی با ضرایب ثابت</a></li>
+      <li><a href="#s7">حل روابط ناهمگن خطی با ضرایب ثابت</a></li>
+      <li><a href="#s8">جمع‌بندی</a></li>
+    </ol>
+  </div>
+
+  <!-- ============ 0 ============ -->
+  <h2 id="s0">۰) اصلاحات مهم فرمولی</h2>
+  <ol>
+    <li>تعریف رابطهٔ همگن خطی با ضرایب ثابت:
+      <div class="formula">\(a_n=c_1a_{n-1}+c_2a_{n-2}+\cdots+c_ka_{n-k}\)</div>
+      (نه \(c_ka_n-k\))
+    </li>
+    <li>در مسئلهٔ فرش کردن زمین \(3\times 2n\):
+      <div class="formula">\(T_n=2R_{n-1}+T_{n-1}\)</div>
+      (نه \(T_n-1\))
+    </li>
+    <li>جواب کلی فیبوناچی باید ترکیب خطی باشد:
+      <div class="formula">\(F_n=\alpha_1\left(\tfrac{1+\sqrt5}{2}\right)^n+\alpha_2\left(\tfrac{1-\sqrt5}{2}\right)^n\)</div>
+    </li>
+    <li>حالت ریشهٔ سه‌گانه:
+      <div class="formula">\(a_n=(\alpha_1+\alpha_2n+\alpha_3n^2)r^n\)</div>
+    </li>
+    <li>جدول جواب خصوصی در بخش ۷ بازنویسی و اصلاح شده است.</li>
+  </ol>
+
+  <!-- ============ 1 ============ -->
+  <h2 id="s1">۱) تعریف رابطهٔ بازگشتی</h2>
+  <p>رابطهٔ بازگشتی برای دنبالهٔ \(\{a_n\}\)، معادله‌ای است که \(a_n\) را برحسب یک یا چند جملهٔ قبلی بیان می‌کند.</p>
+  <p>اگر برای محاسبهٔ \(a_n\) از \(k\) جملهٔ قبلی استفاده شود، رابطه <b>مرتبهٔ \(k\)</b> دارد و به \(k\) شرط اولیه نیاز است:</p>
+  <div class="formula">\(a_0,a_1,\dots,a_{k-1}\)</div>
+  <p>مثال: \(a_n=a_{n-1}+a_{n-3}\) مرتبهٔ ۳ است و به ۳ شرط اولیه نیاز دارد.</p>
+
+  <h3>دسته‌بندی روابط بازگشتی</h3>
+  <ul>
+    <li>همگن / ناهمگن</li>
+    <li>خطی / غیرخطی</li>
+    <li>با ضرایب ثابت / با ضرایب متغیر</li>
+  </ul>
+
+  <!-- ============ 2 ============ -->
+  <h2 id="s2">۲) مثال‌های پایه</h2>
+
+  <h3>فاکتوریل</h3>
+  <div class="formula">\(a_n=n!=n\,(n-1)!\qquad\Longrightarrow\qquad \begin{cases}a_n=n\,a_{n-1}\\ a_1=1\end{cases}\)</div>
+
+  <h3>فیبوناچی</h3>
+  <div class="formula">\(1,1,2,3,5,8,13,\dots\qquad\Longrightarrow\qquad \begin{cases}F_n=F_{n-1}+F_{n-2}\\ F_1=F_2=1\end{cases}\)</div>
+  <p>مرتبهٔ ۲ است و به دو شرط اولیه نیاز دارد.</p>
+
+  <h3>برج هانوی استاندارد</h3>
+  <div class="formula">\(\begin{cases}T_n=2T_{n-1}+1\\ T_1=1\end{cases}\qquad\Longrightarrow\qquad T_n=2^n-1\)</div>
+
+  <!-- ============ 3 ============ -->
+  <h2 id="s3">۳) برج هانوی با حرکت فقط ساعتگرد</h2>
+  <p>فرض کنید میله‌ها به‌ترتیب ساعتگرد \(A\to B\to C\to A\) هستند و فقط حرکت ساعتگرد مجاز است.</p>
+  <ul>
+    <li>\(T_n\): کمترین حرکت برای انتقال \(n\) دیسک از \(A\) به \(C\)</li>
+    <li>\(S_n\): کمترین حرکت برای انتقال \(n\) دیسک از \(A\) به \(B\)</li>
+  </ul>
+  <div class="formula">\(\begin{cases}S_n=2T_{n-1}+1\\ T_n=2T_{n-1}+S_{n-1}+2\end{cases}\)</div>
+  <p>با جایگذاری:</p>
+  <div class="formula">\(T_n=2T_{n-1}+2T_{n-2}+3,\qquad T_0=0,\quad T_1=2\)</div>
+  <p>چند جملهٔ اول: \(T_1=2,\; T_2=7,\; T_3=21,\dots\)</p>
+  <p>جواب صریح:</p>
+  <div class="formula">\(T_n=\left(\tfrac12+\tfrac1{\sqrt3}\right)(1+\sqrt3)^n+\left(\tfrac12-\tfrac1{\sqrt3}\right)(1-\sqrt3)^n-1\)</div>
+
+  <!-- ============ 4 ============ -->
+  <h2 id="s4">۴) مسائل فرش کردن و رشته‌های باینری</h2>
+
+  <h3>زمین \(2\times n\) با موزاییک \(2\times1\)</h3>
+  <div class="formula">\(\begin{cases}T_n=T_{n-1}+T_{n-2}\\ T_1=1,\; T_2=2\end{cases}\)</div>
+  <p>اگر \(F_1=F_2=1\) آنگاه: \(T_n=F_{n+1}\)</p>
+
+  <h3>زمین \(3\times 2n\)</h3>
+  <p>با تعریف زیرمسئلهٔ \(R_n\):</p>
+  <div class="formula">\(\begin{cases}T_n=2R_{n-1}+T_{n-1}\\ R_n=T_n+R_{n-1}\end{cases}\)</div>
+  <p>به رابطهٔ بازگشتی زیر می‌رسیم:</p>
+  <div class="formula">\(T_{n+1}=4T_n-T_{n-1},\qquad T_0=1,\quad T_1=3\)</div>
+  <p>جواب صریح:</p>
+  <div class="formula">\(T_n=\frac{1+\frac1{\sqrt3}}{2}(2+\sqrt3)^n+\frac{1-\frac1{\sqrt3}}{2}(2-\sqrt3)^n\)</div>
+
+  <h3>رشته‌های باینری</h3>
+  <ul>
+    <li>تعداد رشته‌های طول \(n\) که شامل \(11\) هستند:
+      <div class="formula">\(\begin{cases}T_n=T_{n-1}+T_{n-2}+2^{n-2}\\ T_1=0,\; T_2=1\end{cases}\qquad T_n=2^n-F_{n+2}\)</div>
+    </li>
+    <li>تعداد رشته‌های طول \(n\) که شامل \(11\) نیستند:
+      <div class="formula">\(\begin{cases}N_n=N_{n-1}+N_{n-2}\\ N_1=2,\; N_2=3\end{cases}\qquad N_n=F_{n+2}\)</div>
+    </li>
+    <li>تعداد رشته‌های طول \(n\) که شامل \(01\) هستند:
+      <div class="formula">\(T_n=2^n-n-1\)</div>
+      با تعریف \(Z_n\) برای رشته‌های شروع‌شده با صفر:
+      <div class="formula">\(\begin{cases}T_n=T_{n-1}+Z_n\\ Z_n=Z_{n-1}+2^{n-2}\end{cases}\qquad Z_n=2^{n-1}-1\)</div>
+    </li>
+  </ul>
+
+  <!-- ============ 5 ============ -->
+  <h2 id="s5">۵) روش‌های مقدماتی حل</h2>
+
+  <h3>روش تلسکوپی</h3>
+  <p>مناسب برای روابط ساده و خطی با ضرایب یکسان.</p>
+  <p>مثال:</p>
+  <div class="formula">\(\begin{cases}T_n=T_{n-1}+n\\ T_0=1\end{cases}\qquad T_n-T_{n-1}=n\)</div>
+  <p>با جمع‌کردن روابط برای \(n,n-1,\dots,1\):</p>
+  <div class="formula">\(T_n-T_0=1+2+\cdots+n=\frac{n(n+1)}2\qquad\Longrightarrow\qquad T_n=\frac{n(n+1)}2+1\)</div>
+
+  <h3>روش جایگذاری و تکرار</h3>
+  <p>مناسب برای روابط مرتبهٔ ۱.</p>
+  <p>مثال:</p>
+  <div class="formula">\(\begin{cases}T_n=2T_{n-1}+1\\ T_0=0\end{cases}\)</div>
+  <p>با تکرار:</p>
+  <div class="formula">\(T_n=2^nT_0+2^{n-1}+2^{n-2}+\cdots+2+1=2^n-1\)</div>
+
+  <!-- ============ 6 ============ -->
+  <h2 id="s6">۶) حل روابط همگن خطی با ضرایب ثابت</h2>
+
+  <h3>تعریف</h3>
+  <div class="formula">\(a_n=c_1a_{n-1}+c_2a_{n-2}+\cdots+c_ka_{n-k}\)</div>
+  <p>که \(c_i\) اعداد ثابت حقیقی و \(c_k\ne0\) است. به \(k\) شرط اولیه نیاز دارد.</p>
+
+  <h3>معادلهٔ مشخصه</h3>
+  <p>با قرار دادن \(a_n=r^n\):</p>
+  <div class="formula">\(r^k-c_1r^{k-1}-c_2r^{k-2}-\cdots-c_k=0\)</div>
+
+  <h3>حالت‌های ریشه‌ها</h3>
+  <ol>
+    <li>ریشه‌های حقیقی متمایز \(r_1,r_2,\dots,r_k\):
+      <div class="formula">\(a_n=\alpha_1r_1^n+\alpha_2r_2^n+\cdots+\alpha_kr_k^n\)</div>
+    </li>
+    <li>ریشهٔ مضاعف \(r\) با تکرار \(m\):
+      <div class="formula">\(a_n=(\alpha_0+\alpha_1n+\cdots+\alpha_{m-1}n^{m-1})r^n\)</div>
+    </li>
+    <li>ریشهٔ سه‌گانه \(r\):
+      <div class="formula">\(a_n=(\alpha_1+\alpha_2n+\alpha_3n^2)r^n\)</div>
+    </li>
+  </ol>
+
+  <h3>فیبوناچی (حل کامل)</h3>
+  <div class="formula">\(F_n=F_{n-1}+F_{n-2}\quad\Longrightarrow\quad r^2=r+1\quad\Longrightarrow\quad r_{1,2}=\frac{1\pm\sqrt5}{2}\)</div>
+  <p>جواب کلی:</p>
+  <div class="formula">\(F_n=\alpha_1r_1^n+\alpha_2r_2^n\)</div>
+  <p>با \(F_0=0,\; F_1=1\): \(\alpha_1=\tfrac1{\sqrt5},\; \alpha_2=-\tfrac1{\sqrt5}\)</p>
+  <div class="formula">\(F_n=\frac1{\sqrt5}\left[\left(\frac{1+\sqrt5}{2}\right)^n-\left(\frac{1-\sqrt5}{2}\right)^n\right]\)</div>
+
+  <h3>مثال مرتبهٔ ۳</h3>
+  <div class="formula">\(a_{n+2}=-a_{n+1}+a_n+a_{n-1},\qquad a_0=1,\; a_1=-1,\; a_2=2\)</div>
+  <p>معادلهٔ مشخصه:</p>
+  <div class="formula">\(r^3+r^2-r-1=0\quad\Longrightarrow\quad (r+1)^2(r-1)=0\)</div>
+  <p>ریشه‌ها: \(r=1\) و \(r=-1\) با تکرار ۲. جواب کلی:</p>
+  <div class="formula">\(a_n=\alpha+(\beta+\gamma n)(-1)^n\)</div>
+  <p>با شرایط اولیه: \(\alpha=\tfrac14,\; \beta=\tfrac34,\; \gamma=\tfrac12\)</p>
+  <div class="formula">\(a_n=\frac14+\left(\frac34+\frac n2\right)(-1)^n\)</div>
+
+  <!-- ============ 7 ============ -->
+  <h2 id="s7">۷) حل روابط ناهمگن خطی با ضرایب ثابت</h2>
+
+  <h3>تعریف</h3>
+  <div class="formula">\(a_n=c_1a_{n-1}+\cdots+c_ka_{n-k}+F(n),\qquad F(n)\ne0\)</div>
+
+  <h3>مراحل حل</h3>
+  <ol>
+    <li>جواب همگن \(a_n^{(h)}\): با \(F(n)=0\)</li>
+    <li>جواب خصوصی \(a_n^{(p)}\): متناسب با شکل \(F(n)\)</li>
+    <li>جواب نهایی: \(a_n=a_n^{(h)}+a_n^{(p)}\)</li>
+  </ol>
+
+  <h3>جدول شکل جواب خصوصی</h3>
+  <p>فرض کنید \(P_d(n)\) چندجمله‌ای درجهٔ \(d\) و \(Q_d(n)\) چندجمله‌ای کلی همان درجه باشد.</p>
+  <table>
+    <thead>
+      <tr><th>شکل \(F(n)\)</th><th>شرط</th><th>شکل جواب خصوصی</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>\(P_d(n)\)</td><td>\(1\) ریشهٔ مشخصه نباشد</td><td>\(Q_d(n)\)</td></tr>
+      <tr><td>\(P_d(n)\)</td><td>\(1\) ریشهٔ مشخصه با تکرار \(m\) باشد</td><td>\(n^mQ_d(n)\)</td></tr>
+      <tr><td>\(P_d(n)s^n\)</td><td>\(s\) ریشهٔ مشخصه نباشد</td><td>\(Q_d(n)s^n\)</td></tr>
+      <tr><td>\(P_d(n)s^n\)</td><td>\(s\) ریشهٔ مشخصه با تکرار \(m\) باشد</td><td>\(n^mQ_d(n)s^n\)</td></tr>
+    </tbody>
+  </table>
+  <p>اگر \(F(n)\) مجموع چند تابع باشد، جواب خصوصی مجموع جواب‌های متناظر است.</p>
+
+  <h3>مثال کامل</h3>
+  <div class="formula">\(a_n=5a_{n-1}-6a_{n-2}+7^n,\qquad a_0=1,\; a_1=1\)</div>
+  <p>معادلهٔ مشخصهٔ همگن:</p>
+  <div class="formula">\(r^2-5r+6=0\quad\Longrightarrow\quad r=2,3\quad\Longrightarrow\quad a_n^{(h)}=A2^n+B3^n\)</div>
+  <p>چون \(7\) ریشهٔ مشخصه نیست: \(a_n^{(p)}=C7^n\). با جایگذاری:</p>
+  <div class="formula">\(C7^n=5C7^{n-1}-6C7^{n-2}+7^n\quad\Longrightarrow\quad 49C=35C-6C+49\quad\Longrightarrow\quad C=\frac{49}{20}\)</div>
+  <p>جواب عمومی:</p>
+  <div class="formula">\(a_n=A2^n+B3^n+\frac{49}{20}7^n\)</div>
+  <p>با شرایط اولیه: \(A=\tfrac{59}{5},\; B=-\tfrac{53}{4}\)</p>
+  <div class="formula">\(a_n=\frac{59}{5}2^n-\frac{53}{4}3^n+\frac{49}{20}7^n\)</div>
+
+  <h3>مثال‌های جواب خصوصی</h3>
+  <p>برای \(a_n=6a_{n-1}-9a_{n-2}\) معادلهٔ مشخصه \(r^2-6r+9=(r-3)^2=0\) است. ریشهٔ ۳ با تکرار ۲ و جواب همگن \((C_1+C_2n)3^n\).</p>
+  <ol>
+    <li>\(F(n)=n^2\): \(\displaystyle a_n^{(p)}=\frac14n^2+\frac32n+\frac{21}{8}\)</li>
+    <li>\(F(n)=n\cdot2^n\): \(\displaystyle a_n^{(p)}=(4n+24)2^n\)</li>
+    <li>\(F(n)=(n^2+1)3^n\): \(\displaystyle a_n^{(p)}=\frac{n^2(n^2+4n+11)}{12}3^n\)</li>
+    <li>\(F(n)=3^n\): \(\displaystyle a_n^{(p)}=\frac12n^23^n\)</li>
+  </ol>
+
+  <!-- ============ 8 ============ -->
+  <h2 id="s8">۸) جمع‌بندی</h2>
+  <div class="ok">
+    <ul>
+      <li>رابطهٔ بازگشتی، دنباله را برحسب جمله‌های قبلی تعریف می‌کند.</li>
+      <li>برای حل: ابتدا مرتبه و نوع رابطه را تشخیص دهید.</li>
+      <li>روابط ساده: تلسکوپی یا جایگذاری.</li>
+      <li>همگن خطی با ضرایب ثابت: معادلهٔ مشخصه و ریشه‌ها.</li>
+      <li>ناهمگن: جواب همگن + جواب خصوصی.</li>
+      <li>برج هانوی استاندارد: \(T_n=2^n-1\).</li>
+      <li>برج هانوی فقط ساعتگرد: \(T_n=2T_{n-1}+2T_{n-2}+3\) با \(T_0=0,T_1=2\).</li>
+      <li>مسائل فرش کردن و رشته‌های باینری معمولاً به فیبوناچی می‌رسند.</li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    تهیه‌شده بر اساس اسلایدهای «مبانی ترکیبیات — فاطمه بهاری‌فرد» | نسخهٔ بازنویسی و تکمیل‌شده
+  </div>
+
+</div>
+</div>
+
+</body>
+</html>
